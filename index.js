@@ -7,12 +7,15 @@ const server = http.createServer((req, res) => {
         'Content-Type': 'text/plain'
     });
 
-    const vips = ["Joe", "Eric", "Allyson"];
+    const vips = {
+        "Joe": `It is wonderful to see you again`,
+        "notJoe": `You're a villain`,
+        "Chris": `I promise I'm working on things`
+    };
     let reqUrl = req.url.slice(1);
     let content = `Hello, ${reqUrl}`;
-    
-    if (vips.includes(reqUrl)) {
-        content = `How wonderfully splendid it is to be in your presence again, ${reqUrl}! You look magnificent today!`;
+    if (Object.keys(vips).includes(reqUrl)) {
+        content = vips[reqUrl];
     }
     res.end(content);
 })
